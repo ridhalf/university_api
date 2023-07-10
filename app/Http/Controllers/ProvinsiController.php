@@ -11,5 +11,4 @@ class ProvinsiController extends Controller
         $provinsi = Provinsi::select('id', 'nama')->where('status', 1)->get();
         return response()->json($provinsi);
     }
-    //ambil semua provinsi
 }
