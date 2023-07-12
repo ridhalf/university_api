@@ -21,6 +21,10 @@ $router->group(['prefix' => 'auth'], function () use ($router) {
 });
 
 $router->group(['prefix' => 'api', 'middleware' => 'checktoken'], function () use ($router) {
-    $router->get('provinsi', 'ProvinsiController@getAllProvinsi');
-    $router->post('logout', 'AuthController@logout');
+});
+
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->get('provinsi', 'WilayahController@getAllProvinsi');
+    $router->get('kota/{provinsi_id}', 'WilayahController@getKotaById');
 });

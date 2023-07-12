@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\KelasPelajaran;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +14,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call('UsersTableSeeder');
+        $this->call(ProvinsiSeeder::class);
+        $this->call(KotaSeeder::class);
+        $this->call(MataPelajaranSeeder::class);
+        $this->call(AngkatanSeeder::class);
+        $this->call(KelasTableSeeder::class);
+        $this->call(KelasPelajaranSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }
