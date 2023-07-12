@@ -24,23 +24,14 @@ class AuthController extends Controller
         ]);
         $credentials = $request->only(['username', 'password']);
         if (!$token = Auth::attempt($credentials)) {
-            return response()->json([
-                'message' => 'username atau password tidak sesuai'
-            ]);
+            return $this->respondError('Password atau username tidak sesuai', 400, 'BAD_REQUEST');
         }
         return $this->respondWithToken($token);
     }
 
     public function logout(Request $request)
     {
-
-
         auth()->logout();
-
-        return response()->json([
-            'code' => 200,
-            'status' => 'OK',
-            'message' => 'logout sukses'
-        ]);
+        return $this->respondSuccess(null, 'Logout sukses');
     }
 }

@@ -17,6 +17,8 @@ class CreateUsersTable extends Migration
             $table->tinyIncrements('id');
             $table->string('nama', 50);
             $table->string('username', 50);
+            $table->unsignedTinyInteger('kelas_id');
+            $table->foreign('kelas_id')->references('id')->on('kelas');
             $table->string('password', 255);
             $table->timestamps();
         });

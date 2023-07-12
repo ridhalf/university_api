@@ -14,6 +14,7 @@ class JwtMiddleware
     {
         $token      = trim($request->header('x-token'));
         $username   = trim($request->header('x-username'));
+
         if (!$token) {
             return response()->json([
                 'code' => 201,

@@ -72,13 +72,14 @@ $app->configure('app');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    // App\Http\Middleware\ExampleMiddleware::class,
+]);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
     'checktoken' => App\Http\Middleware\JwtMiddleware::class,
+    'kelas' => App\Http\Middleware\KelasMiddleware::class,
 ]);
 
 /*
