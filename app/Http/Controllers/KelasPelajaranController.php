@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KelasPelajaran;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 
 class KelasPelajaranController extends Controller
@@ -17,7 +18,8 @@ class KelasPelajaranController extends Controller
     {
         $this->middleware('kelas', [
             'only' => [
-                'getAllMataPelajaranByKelasId' // Could add bunch of more methods too
+                'getAllMataPelajaranByKelasId',
+                'getAllMahasiswaByKelasId'
             ]
         ]);
     }
@@ -29,5 +31,25 @@ class KelasPelajaranController extends Controller
             ->where('kelas_id', $kelas_id)
             ->get();
         return $this->respondSuccess($mata_pelajaran);
+    }
+    public function getAllMahasiswaByKelasId(Request $request)
+    {
+        $kelas_id = trim($request->kelas_id);
+        $mahasiswa = Mahasiswa::select(
+            'mahasiswa.nama as nama_mahasiswa',
+            'mahasiswa.email as email',
+            'mahasiswa.tanggal_lahir',
+            'mahasiswa.jenis_kelamin',
+            'provinsi.nama as nama_provinsi',
+            'kota.nama as nama_kota'
+        )->join('provinsi', 'provinsi.id', '=', 'mahasiswa.provinsi_id')
+            ->join('kota', 'kota.id', '=', 'mahasiswa.kota_id')
+            ->where('kelas_id', $kelas_id)->get();
+
+        if (count($mahasiswa) > 0) {
+            return $this->respondSuccess($mahasiswa);
+        } else {
+            return $this->respondError('Belum ada data mahasiswa', 200, 'OK');
+        }
     }
 }

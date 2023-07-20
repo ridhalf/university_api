@@ -19,10 +19,10 @@ class KelasMiddleware
         $user = JWTAuth::parseToken()->authenticate();
         if ($user->kelas_id != $request->input('kelas_id')) {
             return response()->json([
-                'code' => 400,
-                'status' => 'BAD_REQUEST',
+                'code' => 401,
+                'status' => 'UNAUTHORIZED',
                 'errors' => 'anda tidak memiliki akses untuk kelas ini'
-            ]);
+            ], 401);
         }
         return $next($request);
     }

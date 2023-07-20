@@ -23,6 +23,7 @@ $router->group(['prefix' => 'auth'], function () use ($router) {
 $router->group(['prefix' => 'api', 'middleware' => 'checktoken'], function () use ($router) {
     $router->post('logout', 'AuthController@logout');
     $router->post('kelas/mata_pelajaran', 'KelasPelajaranController@getAllMataPelajaranByKelasId');
+    $router->post('kelas/mahasiswa', 'KelasPelajaranController@getAllMahasiswaByKelasId');
 });
 
 
